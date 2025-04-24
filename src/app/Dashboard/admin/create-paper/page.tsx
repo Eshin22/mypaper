@@ -1,21 +1,34 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { Button } from "../../../../components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../../../../components/ui/card"
-import { Input } from "../../../../components/ui/input"
-import { Label } from "../../../../components/ui/label"
-import { Textarea } from "../../../../components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../../../components/ui/select"
-import { Checkbox } from "../../../../components/ui/checkbox"
-import DashboardLayout from "../../../../components/dashboard-layout"
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Button } from "../../../components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "../../../components/ui/card";
+import { Input } from "../../../components/ui/input";
+import { Label } from "../../../components/ui/label";
+import { Textarea } from "../../../components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../../../components/ui/select";
+import { Checkbox } from "../../../components/ui/checkbox";
+import DashboardLayout from "../../../components/dashboard-layout";
 
 export default function CreatePaper() {
-  const router = useRouter()
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const router = useRouter();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [paperData, setPaperData] = useState({
     title: "",
     description: "",
@@ -23,32 +36,32 @@ export default function CreatePaper() {
     year: "2025",
     file: null as File | null,
     assignToTeam: false,
-  })
+  });
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setPaperData({
         ...paperData,
         file: e.target.files[0],
-      })
+      });
     }
-  }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
+    e.preventDefault();
+    setIsSubmitting(true);
 
     try {
       // In a real app, this would connect to the backend
       // Simulating API call for preview
-      await new Promise((resolve) => setTimeout(resolve, 1000))
-      router.push("/dashboard/admin")
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      router.push("/dashboard/admin");
     } catch (error) {
-      console.error("Error creating paper:", error)
+      console.error("Error creating paper:", error);
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
-  }
+  };
 
   return (
     <DashboardLayout>
@@ -60,7 +73,9 @@ export default function CreatePaper() {
         <form onSubmit={handleSubmit}>
           <CardHeader>
             <CardTitle>Paper Details</CardTitle>
-            <CardDescription>Enter the details for the new chemistry paper</CardDescription>
+            <CardDescription>
+              Enter the details for the new chemistry paper
+            </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
@@ -69,7 +84,9 @@ export default function CreatePaper() {
                 id="title"
                 placeholder="e.g., Chemistry Main Paper"
                 value={paperData.title}
-                onChange={(e) => setPaperData({ ...paperData, title: e.target.value })}
+                onChange={(e) =>
+                  setPaperData({ ...paperData, title: e.target.value })
+                }
                 required
               />
             </div>
@@ -79,7 +96,9 @@ export default function CreatePaper() {
                 <Label htmlFor="paperType">Paper Type</Label>
                 <Select
                   value={paperData.paperType}
-                  onValueChange={(value: any) => setPaperData({ ...paperData, paperType: value })}
+                  onValueChange={(value: any) =>
+                    setPaperData({ ...paperData, paperType: value })
+                  }
                   required
                 >
                   <SelectTrigger id="paperType">
@@ -98,7 +117,9 @@ export default function CreatePaper() {
                 <Label htmlFor="year">Year</Label>
                 <Select
                   value={paperData.year}
-                  onValueChange={(value: any) => setPaperData({ ...paperData, year: value })}
+                  onValueChange={(value: any) =>
+                    setPaperData({ ...paperData, year: value })
+                  }
                   required
                 >
                   <SelectTrigger id="year">
@@ -119,35 +140,54 @@ export default function CreatePaper() {
                 id="description"
                 placeholder="Enter details about this paper..."
                 value={paperData.description}
-                onChange={(e) => setPaperData({ ...paperData, description: e.target.value })}
+                onChange={(e) =>
+                  setPaperData({ ...paperData, description: e.target.value })
+                }
                 rows={4}
               />
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="file">Upload Paper (PDF)</Label>
-              <Input id="file" type="file" accept=".pdf,.doc,.docx" onChange={handleFileChange} required />
+              <Input
+                id="file"
+                type="file"
+                accept=".pdf,.doc,.docx"
+                onChange={handleFileChange}
+                required
+              />
             </div>
 
             <div className="flex items-center space-x-2">
               <Checkbox
                 id="assignToTeam"
                 checked={paperData.assignToTeam}
-                onCheckedChange={(checked: boolean) => setPaperData({ ...paperData, assignToTeam: checked as boolean })}
+                onCheckedChange={(checked: boolean) =>
+                  setPaperData({
+                    ...paperData,
+                    assignToTeam: checked as boolean,
+                  })
+                }
               />
-              <Label htmlFor="assignToTeam">Assign to marking team immediately</Label>
+              <Label htmlFor="assignToTeam">
+                Assign to marking team immediately
+              </Label>
             </div>
           </CardContent>
           <CardFooter>
             <Button type="submit" disabled={isSubmitting} className="mr-2">
               {isSubmitting ? "Creating..." : "Create Paper"}
             </Button>
-            <Button type="button" variant="outline" onClick={() => router.push("/dashboard/admin")}>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => router.push("/dashboard/admin")}
+            >
               Cancel
             </Button>
           </CardFooter>
         </form>
       </Card>
     </DashboardLayout>
-  )
+  );
 }

@@ -3,12 +3,29 @@
 import type React from "react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Button } from "../../../../components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../../../components/ui/card";
-import { Input } from "../../../../components/ui/input";
-import { Label } from "../../../../components/ui/label";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../../../components/ui/tabs";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../../../components/ui/select";
+import { Button } from "../../../components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../../../components/ui/card";
+import { Input } from "../../../components/ui/input";
+import { Label } from "../../../components/ui/label";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "../../../components/ui/tabs";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../../../components/ui/select";
 import {
   Dialog,
   DialogContent,
@@ -17,10 +34,10 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "../../../../components/ui/dialog";
+} from "../../../components/ui/dialog";
 import { PlusCircle, Search, UserPlus } from "lucide-react";
-import DashboardLayout from "../../../../components/dashboard-layout";
-import TeamMembers from "../../../../components/team-members";
+import DashboardLayout from "../../../components/dashboard-layout";
+import TeamMembers from "../../../components/team-members";
 
 export default function ManageTeam() {
   const router = useRouter();
@@ -78,7 +95,9 @@ export default function ManageTeam() {
             <form onSubmit={handleAddMember}>
               <DialogHeader>
                 <DialogTitle>Add Team Member</DialogTitle>
-                <DialogDescription>Add a new member to your paper marking team.</DialogDescription>
+                <DialogDescription>
+                  Add a new member to your paper marking team.
+                </DialogDescription>
               </DialogHeader>
               <div className="grid gap-4 py-4">
                 <div className="space-y-2">
@@ -86,7 +105,9 @@ export default function ManageTeam() {
                   <Input
                     id="name"
                     value={newMember.name}
-                    onChange={(e) => setNewMember({ ...newMember, name: e.target.value })}
+                    onChange={(e) =>
+                      setNewMember({ ...newMember, name: e.target.value })
+                    }
                     required
                   />
                 </div>
@@ -96,26 +117,41 @@ export default function ManageTeam() {
                     id="email"
                     type="email"
                     value={newMember.email}
-                    onChange={(e) => setNewMember({ ...newMember, email: e.target.value })}
+                    onChange={(e) =>
+                      setNewMember({ ...newMember, email: e.target.value })
+                    }
                     required
                   />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="role">Role</Label>
-                  <Select value={newMember.role} onValueChange={(value: any) => setNewMember({ ...newMember, role: value })}>
+                  <Select
+                    value={newMember.role}
+                    onValueChange={(value: any) =>
+                      setNewMember({ ...newMember, role: value })
+                    }
+                  >
                     <SelectTrigger id="role">
                       <SelectValue placeholder="Select role" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="marker">Marker</SelectItem>
-                      <SelectItem value="senior-marker">Senior Marker</SelectItem>
-                      <SelectItem value="junior-marker">Junior Marker</SelectItem>
+                      <SelectItem value="senior-marker">
+                        Senior Marker
+                      </SelectItem>
+                      <SelectItem value="junior-marker">
+                        Junior Marker
+                      </SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
               </div>
               <DialogFooter>
-                <Button type="button" variant="outline" onClick={() => setIsDialogOpen(false)}>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => setIsDialogOpen(false)}
+                >
                   Cancel
                 </Button>
                 <Button type="submit" disabled={isSubmitting}>
@@ -140,7 +176,12 @@ export default function ManageTeam() {
         </div>
       </div>
 
-      <Tabs defaultValue="all-members" value={activeTab} onValueChange={setActiveTab} className="space-y-4">
+      <Tabs
+        defaultValue="all-members"
+        value={activeTab}
+        onValueChange={setActiveTab}
+        className="space-y-4"
+      >
         <TabsList>
           <TabsTrigger value="all-members">All Members</TabsTrigger>
           <TabsTrigger value="active">Active</TabsTrigger>
@@ -163,7 +204,9 @@ export default function ManageTeam() {
           <Card>
             <CardHeader>
               <CardTitle>Active Members</CardTitle>
-              <CardDescription>Team members currently working on papers</CardDescription>
+              <CardDescription>
+                Team members currently working on papers
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <TeamMembers />
@@ -175,13 +218,19 @@ export default function ManageTeam() {
           <Card>
             <CardHeader>
               <CardTitle>Inactive Members</CardTitle>
-              <CardDescription>Team members not currently assigned to papers</CardDescription>
+              <CardDescription>
+                Team members not currently assigned to papers
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="text-center py-8">
                 <UserPlus className="mx-auto h-12 w-12 text-muted-foreground opacity-50" />
-                <h3 className="mt-2 text-sm font-medium">No inactive members</h3>
-                <p className="mt-1 text-sm text-muted-foreground">All team members are currently active.</p>
+                <h3 className="mt-2 text-sm font-medium">
+                  No inactive members
+                </h3>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  All team members are currently active.
+                </p>
                 <div className="mt-4">
                   <Button onClick={() => setIsDialogOpen(true)}>
                     <PlusCircle className="mr-2 h-4 w-4" />

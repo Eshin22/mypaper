@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Button } from "../../components/ui/button";
+import { Button } from "../components/ui/button";
 import {
   Table,
   TableBody,
@@ -9,9 +9,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "../../components/ui/table";
+} from "../components/ui/table";
 import { Eye, CheckCircle, XCircle } from "lucide-react";
-import { Paper } from "../../../models/Paper";
+import { Paper } from "../../models/Paper";
 
 // Your component code
 export default function ReviewerPage() {

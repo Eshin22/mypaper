@@ -3,17 +3,22 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Button } from "../../../components/ui/button";
+import { Button } from "../../components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "../../../components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../../components/ui/tabs";
+} from "../../components/ui/card";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "../../components/ui/tabs";
 import { PlusCircle, FileText, Users, CheckCircle } from "lucide-react";
-import DashboardLayout from "../../../components/dashboard-layout";
+import DashboardLayout from "../../components/dashboard-layout";
 
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState("overview");
